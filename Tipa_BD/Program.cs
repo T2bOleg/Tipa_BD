@@ -161,7 +161,7 @@ namespace MyBD
                 {
                     data += _zal.Pack() + "#";
                 }
-                //data = data.Remove(data.Length - 1);
+                data = data.Remove(data.Length - 1);
                 fs.Write(Encoding.Default.GetBytes(data));
                 fs.Close();
 
