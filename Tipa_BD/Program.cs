@@ -152,7 +152,6 @@ namespace MyBD
             }
             void Write_data()
             {
-                File.Delete(data_file);
                 FileStream fs = new FileStream(data_file, FileMode.Create);
                 string data = "";
 
