@@ -7,13 +7,13 @@ namespace MyBD
     {
         static void Main(string[] args)
         {
-
             string data_file = @"D:\kinozaly.tipaBD";
             List<Zal> zal_list = new List<Zal>();
             Read_data();
             Console.Clear();
             while (true)
             {
+                Console.ResetColor();
 
                 foreach (var _zal in zal_list)
                     Console.WriteLine(_zal.ToString());
@@ -23,7 +23,7 @@ namespace MyBD
                 {
                     case "help":
                         Console.Clear();
-                        Console.WriteLine("new - новый зал\nadd - добавить сеанс\ndel - удалить сеанс\nupd - изменить количество билетов\nbuy - продать билеты\nref - вернуть билеты\nsave - сохранить данные и выйти\nquit - выйти без сохраненя");
+                        Console.WriteLine("new - новый зал\nadd - добавить сеанс\ndel - удалить сеанс\nupd - изменить количество билетов\nbuy - продать билеты\nref - вернуть билеты\nsave - сохранить данные и выйти\nquit - выйти без сохраненя", Console.ForegroundColor = ConsoleColor.Blue);
                         break;
                     case "add":
                         Console.Clear();
@@ -41,7 +41,7 @@ namespace MyBD
                         catch (Exception ex)
                         {
                             Console.Clear();
-                            Console.WriteLine("Error");
+                            Console.WriteLine("Некорректные данные", Console.ForegroundColor = ConsoleColor.Red);
                         }
                         break;
                     case "new":
@@ -57,14 +57,14 @@ namespace MyBD
                             string n = Console.ReadLine();
                             Console.Clear();
                             if (zal_list[z - 1].del_seans(n))
-                                Console.WriteLine("Успешно");
+                                Console.WriteLine("Успешно", Console.ForegroundColor = ConsoleColor.Green);
                             else
-                                Console.WriteLine("Сеанс не найден");
+                                Console.WriteLine("Сеанс не найден", Console.ForegroundColor = ConsoleColor.Red);
                         }
                         catch (Exception ex)
                         {
                             Console.Clear();
-                            Console.WriteLine("Error");
+                            Console.WriteLine("Некорректные данные", Console.ForegroundColor = ConsoleColor.Red);
                         }
                         break;
                     case "upd":
@@ -77,7 +77,7 @@ namespace MyBD
                         catch (Exception ex)
                         {
                             Console.Clear();
-                            Console.WriteLine("Error");
+                            Console.WriteLine("Некорректные данные", Console.ForegroundColor = ConsoleColor.Red);
                         }
                         break;
                     case "buy":
@@ -90,7 +90,7 @@ namespace MyBD
                         catch (Exception ex)
                         {
                             Console.Clear();
-                            Console.WriteLine("Error");
+                            Console.WriteLine("Некорректные данные", Console.ForegroundColor = ConsoleColor.Red);
                         }
                         break;
                     case "ref":
@@ -106,19 +106,18 @@ namespace MyBD
                         catch (Exception ex)
                         {
                             Console.Clear();
-                            Console.WriteLine("Error");
+                            Console.WriteLine("Некорректные данные", Console.ForegroundColor = ConsoleColor.Red);
                         }
                         break;
                     case "save":
                         Write_data();
-                        Environment.Exit(0);
                         break;
                     case "quit":
                         Environment.Exit(0);
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Ошибка команды");
+                        Console.WriteLine("Ошибка команды", Console.ForegroundColor = ConsoleColor.Red);
                         break;
 
                 }
@@ -153,6 +152,7 @@ namespace MyBD
             }
             void Write_data()
             {
+                File.Delete(data_file);
                 FileStream fs = new FileStream(data_file, FileMode.Create);
                 string data = "";
 
@@ -166,9 +166,9 @@ namespace MyBD
 
 
             }
-        
+
+        }
     }
-}
     class Seans
     {
         public Seans(string name, int bilets)
@@ -232,12 +232,12 @@ namespace MyBD
                 if (seanses[i].name == name)
                 {
                     seanses[i].update(value, update);
-                    Console.WriteLine("Успешно");
+                    Console.WriteLine("Успешно", Console.ForegroundColor = ConsoleColor.Green);
                     b = false;
                     break;
                 }
             }
-            if (b) Console.WriteLine("Сеанс не найден");
+            if (b) Console.WriteLine("Сеанс не найден", Console.ForegroundColor = ConsoleColor.Red);
         }
         public override string ToString()
         {
